@@ -1,0 +1,19 @@
+.controls {
+	position: absolute;
+	margin: auto;
+	left: 0; right: 0;
+	top: auto; bottom: 0;
+	min-height: 10px;
+
+	&__range {
+		display: block;
+		width: 100%;
+	}
+}
+
+@keyframes sizing {
+    to {
+        width: 20px;
+        height: 20px;
+    }
+}

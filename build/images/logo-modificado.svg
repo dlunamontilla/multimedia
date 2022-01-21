@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="91.118469mm"
+   height="51.782368mm"
+   viewBox="0 0 91.118469 51.782368"
+   version="1.1"
+   id="svg64"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="logo-modificado.svg"
+   inkscape:export-filename="/home/david/aplicaciones/peliculas/build/images/logo-modificado.png"
+   inkscape:export-xdpi="60.476189"
+   inkscape:export-ydpi="60.476189">
+  <defs
+     id="defs58" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="292.11169"
+     inkscape:cy="118.74325"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="786"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata61">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(178.60685,-82.876673)">
+    <path
+       style="opacity:1;fill:#ec0000;fill-opacity:1;stroke:none;stroke-width:22.54487801;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 11.521484,40 C 5.1389962,40 0,45.137122 0,51.519531 v 12.673828 c 0,6.382466 5.1389962,11.519532 11.521484,11.519532 h 38.486328 c 6.382375,0 11.521485,-5.137066 11.521485,-11.519532 V 51.519531 C 61.529297,45.137122 56.390187,40 50.007812,40 Z m 282.857426,0 c -6.38249,0 -11.52149,5.137122 -11.52149,11.519531 v 12.673828 c 0,6.382466 5.139,11.519532 11.52149,11.519532 h 38.48632 c 6.38249,0 11.51954,-5.137066 11.51954,-11.519532 V 51.519531 C 344.38477,45.137122 339.24772,40 332.86523,40 Z M 137.70117,76.939453 c -1.9718,-0.03097 -3.56643,0.259748 -4.70312,0.916016 -14.54962,8.400224 -14.54962,111.601731 0,120.001951 14.54961,8.40023 103.92578,-43.2015 103.92578,-60.00195 0,-15.48791 -75.9554,-60.550588 -99.22266,-60.916017 z M 11.521484,120 C 5.1389962,120 0,125.13704 0,131.51953 v 12.67383 c 0,6.38249 5.1389962,11.51953 11.521484,11.51953 h 38.486328 c 6.382375,0 11.521485,-5.13704 11.521485,-11.51953 V 131.51953 C 61.529297,125.13704 56.390187,120 50.007812,120 Z m 282.857426,0 c -6.38249,0 -11.52149,5.13704 -11.52149,11.51953 v 12.67383 c 0,6.38249 5.139,11.51953 11.52149,11.51953 h 38.48632 c 6.38249,0 11.51954,-5.13704 11.51954,-11.51953 V 131.51953 C 344.38477,125.13704 339.24772,120 332.86523,120 Z M 11.521484,200 C 5.1389962,200 0,205.13701 0,211.51953 v 12.67383 c 0,6.38249 5.1389962,11.51953 11.521484,11.51953 h 38.486328 c 6.382375,0 11.521485,-5.13704 11.521485,-11.51953 V 211.51953 C 61.529297,205.13701 56.390187,200 50.007812,200 Z m 282.857426,0 c -6.38249,0 -11.52149,5.13701 -11.52149,11.51953 v 12.67383 c 0,6.38249 5.139,11.51953 11.52149,11.51953 h 38.48632 c 6.38249,0 11.51954,-5.13704 11.51954,-11.51953 V 211.51953 C 344.38477,205.13701 339.24772,200 332.86523,200 Z"
+       transform="matrix(0.26458333,0,0,0.26458333,-178.60685,72.29334)"
+       id="path43"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

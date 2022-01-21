@@ -1,0 +1,378 @@
+:root {
+	font: {
+		family: "Open Sans", sans-serif, arial;
+		size: 16px;
+	}
+	background-color: lighten($color-base, 5);
+	color: $color-text;
+	line-height: 1.6;
+
+	scroll-behavior: smooth;
+}
+
+* {
+	box-sizing: border-box;
+
+	&::before,
+	&::after {
+		box-sizing: inherit;
+	}
+}
+
+html, body {
+	min-height: 100vh;
+	@media screen and (min-width: 980px) {
+		overflow: hidden;
+	}
+}
+
+body {
+	padding: 0;
+	margin: 0;
+
+	display: flex;
+	flex-direction: column;
+}
+.header {
+	min-height: 70px;
+	// border-bottom: 1px solid rgba(white, 0.1);
+	// background-color: rgba(black, 0.1);
+	padding: 0 20px;	
+	align-items: center;
+	justify-content: space-between;
+
+	background-color: white;
+	border-bottom: $border;
+
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0;
+		font-size: 1.2rem;
+	}
+
+	&,
+	&__title {
+		display: flex;
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		font: inherit;
+		color: $color-secundario;
+
+		&:hover {
+			opacity: 0.8;
+		}
+
+		&:active {
+			opacity: 1;
+			transition: none;
+		}
+	}
+}
+
+.logo {
+	margin-right: 10px;
+
+	img {
+		display: block;
+		max-height: 40px;
+	}
+}
+
+main {
+	flex-grow: 1;
+	flex-shrink: 0;
+	min-height: 10px;
+	display: flex;
+	width: 100%;
+
+	@media screen and (min-width: 980px) {
+		min-height: 50vh;
+	}
+
+	@media screen and (max-width: 979px) {
+		min-height: 100vh;
+	}
+}
+
+.footer {
+	position: relative;
+	background-color: darken($color-base, 5);
+	
+	&__inner {
+		display: flex;
+		align-items: center;
+		min-height: 50px;
+	}
+}
+
+.flex {
+	--adjust-left: 50%;
+	--adjust-right: 50%;
+
+	margin: 0 auto;
+	background-color: darken($color-base, 1);
+	width: 100%;
+
+	box-shadow: inset 0 0 10px darken($color-base, 10);
+	@media screen and (min-width: 980px) {
+		display: flex;
+	}
+
+	&__item {
+		flex-shrink: 1;
+		flex-grow: 1;
+		position: relative;
+		transition: 300ms ease;
+
+		&--multimedia {
+			background-color: rgba(black, 0.2);
+			position: relative;
+			overflow: hidden;
+
+			@media screen and (min-width: 980px) {
+				width: var(--adjust-left);
+			}
+		}
+
+		&--sidebar {
+			position: relative;
+
+			@media screen and (min-width: 980px) {
+				width: var(--adjust-right);
+			}
+		}
+
+		&__inner {
+			background-color: black;
+			display: flex;
+			gap: 10px;
+
+			@media screen and (min-width: 980px) {
+				position: relative;
+				height: 100%;
+			}
+		}
+	}
+}
+
+video {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	height: auto;
+	width: 100%;
+
+
+	@media screen and (min-width: 980px) {
+		position: absolute;
+		height: 100%;
+		width: auto;
+		max-width: 70vw;
+	}
+
+	&:-webkit-full-screen {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+canvas {
+	position: relative;
+	margin: auto;
+	height: 100%;
+	width: 100%;
+
+	object-fit: contain;
+
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.footer {
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+
+	$background: darken($color-base, 80);
+	$background: desaturate($background, 60);
+	background-color: $background;
+	color: white;
+
+	p {
+		margin: 0;
+	}
+}
+
+.lists {
+	height: 100%;
+	overflow: auto;
+	padding: 10px;
+
+	position: relative;
+	display: grid;
+
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	align-content: start;
+	gap: 10px;
+
+	@media screen and (min-width: 980px) {
+		position: absolute;
+		margin: auto;
+		left: 0; right: 0;
+		top: 0; bottom: 0;
+	}
+
+	&__item {
+		padding: 10px;
+		border: 1px solid darken($color-base, 10);
+		text-decoration: none;
+		color: inherit;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		background-color: rgba(white, 0.7);
+
+		border-radius: 5px;
+		color: darken($color-text, 15);
+		transition: 300ms ease;
+
+		& > * {
+			pointer-events: none;
+		}
+
+		&:hover {
+			color: $color-text;
+			border-color: rgba($color-text, 0.3);
+			background-color: rgba($color-text, 0.05);
+		}
+
+		&:active {
+			color: darken($color-text, 15);
+			background-color: transparent;
+			transition: none;
+		}
+
+		&__graphic {
+			position: relative;
+			width: 100%;
+			flex-shrink: 0;
+			background-color: rgba($color-base, 0.3);
+			padding-top: 56.25%;
+			background-color: darken(white, 20);
+
+			&__img {
+				display: block;
+				position: absolute;
+				margin: auto;
+				left: 0; right: 0;
+				top: 0; bottom: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+
+			}
+		}
+
+		&__content {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			&__title {
+				padding: 10px;
+				text-overflow: ellipsis;
+			}
+		}
+	}
+}
+
+.search {
+	display: none;
+	--height: 40px;
+	--size-button: var(--height);
+
+	--display: block;
+
+	&__input {
+		display: var(--display);
+		position: relative;
+		height: var(--height);
+		min-width: 200px;
+		border-radius: calc(var(--size-button) / 2);
+		background-color: $color-base;
+	}
+
+	[type="search"],
+	&__button {
+		display: var(--display);
+		height: 100%;
+		font: inherit;
+		background-image: none;
+		transition: 300ms ease;
+		outline: medium none;
+
+		position: absolute;
+		margin: auto;
+		top: 0; bottom: 0;
+
+		width: calc(100% - var(--size-button));
+		background-color: lighten(red, 40);
+		caret-color: red;
+		color: red;
+	}
+
+	[type="search"] {
+		--padding: 10px;
+		border: 1px solid transparent;
+		left: 0; right: auto;
+		padding-right: var(--padding);
+		padding-left: calc(var(--size-button) / 2 );
+		border-radius: calc(var(--size-button) / 2) 0 0 calc(var(--size-button) / 2);
+		border-right: 1px solid rgba(red, 0.2);
+
+		&:focus {
+			background-color: lighten(red, 50);
+			color: red;
+			border-color: rgba(red, 0.3);
+		}
+	}
+
+	&__button {
+		width: var(--size-button);
+		border: 0;
+		left: auto; right: 0;
+		border-radius: 0 calc(var(--size-button) / 2) calc(var(--size-button) / 2) 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		svg {
+			display: block;
+			width: calc(var(--size-button) / 1.8);
+			height: calc(var(--size-button) / 1.8);
+		}
+
+		path {
+			fill: darken(red, 10);
+			transition: 300ms ease;
+		}
+
+		&:hover,
+		&:focus {
+			background-color: red;
+
+			path {
+				fill: white;
+			}
+		}
+	}
+}

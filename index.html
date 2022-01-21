@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, user-scalable=no"
+        />
+        <title>Multimedia / Películas</title>
+
+        <link rel="stylesheet" type="text/css" href="build/css/style.css" />
+        <link rel="icon" type="image/png" href="favicon.png" />
+    </head>
+    <body>
+        <header class="header">
+            <a href="./" class="header__title">
+                <div class="logo">
+                    <img src="build/images/logo-modificado.svg" />
+                </div>
+
+                <h1>Multimedia / Películas</h1>
+            </a>
+
+            <div id="resultados"></div>
+
+            <div class="header__menu">
+                <div class="search">
+                    <form
+                        action=""
+                        method="get"
+                        id="search"
+                        class="search__form"
+                    >
+                        <label class="search__input">
+                            <input
+                                type="search"
+                                name="q"
+                                id="q"
+                                placeholder="Búsqueda..."
+                            />
+                            <button
+                                type="submit"
+                                class="search__button"
+                                data-svg="build/images/search.xml"
+                            ></button>
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="flex" id="multimedia-container">
+                <!-- Los valores son: all | current
+					Cuando no se establece un valor válido o no se define reproducirá
+					toda la lista sin repetirla. -->
+                <section
+                    class="flex__item flex__item--multimedia"
+                    id="multimedia"
+                    data-repeat="current"
+                ></section>
+                <aside
+                    class="flex__item flex__item--sidebar"
+                    id="sidebar"
+                ></aside>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer__inner">
+                <p>David E Luna M</p>
+            </div>
+        </footer>
+
+        <script src="build/js/main.js" type="module"></script>
+    </body>
+</html>
