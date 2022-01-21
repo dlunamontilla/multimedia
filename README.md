@@ -24,8 +24,16 @@ Sin embargo, el archivo antes mencionado se encuentra en la carpeta raíz del pr
 Para utilizarlo con JavaScript solo tiene que establecer la ruta así:
 
 ```js
+/**
+ * @param { string } path Ruta de la API.
+ * @returns { Promise<any> }
+ */
 const getData = async (path) => {
     const response = await fetch(path);
     const data = await response.json();
+
+    console.log({ data });
 };
+
+getData("/api/");
 ```
