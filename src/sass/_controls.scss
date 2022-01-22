@@ -1,19 +1,109 @@
 .controls {
-	position: absolute;
-	margin: auto;
-	left: 0; right: 0;
-	top: auto; bottom: 0;
-	min-height: 10px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    min-height: 10px;
 
-	&__range {
-		display: block;
-		width: 100%;
-	}
+    &__range {
+        display: block;
+        width: 100%;
+    }
 }
 
 @keyframes sizing {
     to {
         width: 20px;
         height: 20px;
+    }
+}
+
+.search {
+    --height: 40px;
+    --size-button: var(--height);
+
+    --display: block;
+
+    &__input {
+        display: var(--display);
+        position: relative;
+        height: var(--height);
+        min-width: 200px;
+        border-radius: calc(var(--size-button) / 2);
+        background-color: $color-base;
+    }
+
+    [type="search"],
+    &__button {
+        display: var(--display);
+        height: 100%;
+        font: inherit;
+        background-image: none;
+        transition: 300ms ease;
+        outline: medium none;
+
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+
+        width: calc(100% - var(--size-button));
+        background-color: lighten(red, 40);
+        caret-color: red;
+        color: red;
+    }
+
+    [type="search"] {
+        --padding: 10px;
+        border: 1px solid transparent;
+        left: 0;
+        right: auto;
+        padding-right: var(--padding);
+        padding-left: calc(var(--size-button) / 2);
+        border-radius: calc(var(--size-button) / 2) 0 0
+            calc(var(--size-button) / 2);
+        border-right: 1px solid rgba(red, 0.2);
+
+        &:focus {
+            background-color: lighten(red, 50);
+            color: red;
+            border-color: rgba(red, 0.3);
+        }
+    }
+
+    &__button {
+        width: var(--size-button);
+        border: 0;
+        left: auto;
+        right: 0;
+        border-radius: 0 calc(var(--size-button) / 2)
+            calc(var(--size-button) / 2) 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        svg {
+            display: block;
+            width: calc(var(--size-button) / 1.8);
+            height: calc(var(--size-button) / 1.8);
+        }
+
+        path {
+            fill: darken(red, 10);
+            transition: 300ms ease;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: red;
+
+            path {
+                fill: white;
+            }
+        }
     }
 }

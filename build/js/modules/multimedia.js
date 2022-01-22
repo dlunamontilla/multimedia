@@ -4,13 +4,15 @@ import { keyboard, toggleFullScreen } from "./keyboard.js";
 import controls from "./controls.js"
 import setAttributes from "./setAttributes.js";
 import adjustElement from "./adjustElement.js";
+import { searchData } from "./get-register.js";
+
 // import loadData from "./canvas.js";
 
 /**
  * @param { string } path Ruta de la API
  * @return { Promise<Array<string|number>> }
  */
-async function getData (path) {
+async function getData(path) {
 	const response = await fetch(path);
 	const data = await response.json();
 
@@ -77,47 +79,66 @@ async function render(config) {
 
 	const links = [];
 
-	lists.textContent = "";
+	/**
+	 * 
+	 * @param { Array<string|number> } data Lista de archivos
+	 */
+	const loadList = (data) => {
+		lists.textContent = "";
+		data.forEach((path, index) => {
+			let __path = path.replace(/^(.\/)+/g, "");
+			__path = __path.replace(/(y2mate\.com)+/g, "");
+			__path = __path.replace(" - ", "");
+			__path = __path.replace(/([a-zá-ź_\-0-9]+\.mp4)/gi, "");
+			__path = __path.replace(/([a-zá-ź_\-0-9]+\.webm)/gi, "");
+			__path = __path.substring(0, 50) + "...";
 
-	data.forEach((path, index) => {
-		let __path = path.replace(/^(.\/)+/g, "");
-		__path = __path.replace(/(y2mate\.com)+/g, "");
-		__path = __path.replace(" - ", "");
-		__path = __path.replace(/([a-zá-ź_\-0-9]+\.mp4)/gi, "");
-		__path = __path.replace(/([a-zá-ź_\-0-9]+\.webm)/gi, "");
-		__path = __path.substring(0, 50) + "...";
+			const video = `multimedia/${path.replace(/^(\.\/)/, "")}`;
+			let imagen = "multimedia/jpeg" + path.replace(/(\.webm|\.mp4)/gi, ".jpg");
+			imagen = imagen.replace(".", "");
 
-		const video = `multimedia/${path.replace(/^(\.\/)/, "")}`;
-		let imagen = "multimedia/jpeg" + path.replace(/(\.webm|\.mp4)/gi, ".jpg");
-		imagen = imagen.replace(".", "");
+			const __list = list.cloneNode(false),
+				__graphic = graphic.cloneNode(false),
+				__img = img.cloneNode(false),
+				__content = content.cloneNode(false),
+				__title = title.cloneNode(false);
 
-		const __list = list.cloneNode(false),
-			__graphic = graphic.cloneNode(false),
-			__img = img.cloneNode(false),
-			__content = content.cloneNode(false),
-			__title = title.cloneNode(false);
+			__title.textContent = __path;
+			// __title.textContent = path;
 
-		__title.textContent = __path;
-		// __title.textContent = path;
+			__img.setAttribute("src", imagen);
+			__graphic.appendChild(__img);
+			__content.appendChild(__title);
 
-		__img.setAttribute("src", imagen);
-		__graphic.appendChild(__img);
-		__content.appendChild(__title);
+			// Enlaces:
+			setAttributes(__list, {
+				"data-id": index,
+				href: video
+			});
 
-		// Enlaces:
-		setAttributes(__list, {
-			"data-id": index,
-			href: video
+			__list.append(__graphic, __content);
+
+			lists.appendChild(__list);
+
+			links.push({ href: video, __list });
 		});
 
-		__list.append(__graphic, __content);
+	}
 
-		lists.appendChild(__list);
 
-		links.push({ href: video, __list });
-	});
+	loadList(data);
 
-	lists.addEventListener("click", function(e) {
+	const inputQuery = document.querySelector("#q");
+	if (inputQuery) {
+		inputQuery.oninput = function () {
+			console.clear();
+			const peliculas = searchData(this.value, data);
+
+			loadList(peliculas);
+		}
+	}
+
+	lists.addEventListener("click", function (e) {
 		e.preventDefault();
 		const anchor = e.target;
 
@@ -181,16 +202,16 @@ async function render(config) {
 			width: videoWidth,
 			height: videoHeight
 		});
-		
+
 		this.play();
 		// if (footer) controls(this, footer);
-		
+
 		if (multimediaContainer) {
 			adjustElement(this, multimediaContainer);
 		}
 	});
 
-	addEventListener("resize", function() {
+	addEventListener("resize", function () {
 		adjustElement(video, multimediaContainer);
 	});
 }
