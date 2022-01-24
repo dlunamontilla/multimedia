@@ -1,10 +1,10 @@
 import createElements from "./createElements.js";
 import isInput from "./isInput.js";
 import { keyboard, toggleFullScreen } from "./keyboard.js";
-import controls from "./controls.js"
 import setAttributes from "./setAttributes.js";
 import adjustElement from "./adjustElement.js";
 import { searchData } from "./get-register.js";
+import search from "./search.js";
 
 // import loadData from "./canvas.js";
 
@@ -24,6 +24,11 @@ async function getData(path) {
  * @returns { void }
  */
 async function render(config) {
+	/**
+	 * @type { HTMLInputElement }
+	 */
+	const inputQuery = document.querySelector("#q");
+
 	const { selectorMultimedia, selectorAside, path = "api/" } = config;
 	if (!selectorMultimedia || !selectorAside) return;
 
@@ -39,9 +44,18 @@ async function render(config) {
 	}
 
 	const data = await getData(path);
-	let [defaultPath] = data;
+	const filteredData = search(data);
 
-	if (!defaultPath) {
+
+	/**
+	 * Ruta predeterminada en función del criterio de búsqueda
+	 * previamente introducido por el usuario.
+	 */
+	let [defaultPath] = inputQuery.value.trim().length > 0
+		? searchData(inputQuery.value, data)
+		: filteredData;
+
+	if (!data.length > 0) {
 		console.warn("Agregue videos en la carpeta multimedia y dentro de la carpeta multimedia agregue una carpeta llamada \"jpeg\"");
 		return;
 	}
@@ -76,7 +90,12 @@ async function render(config) {
 	img.classList.add("lists__item__graphic__img");
 	content.classList.add("lists__item__content");
 	title.classList.add("lists__item__content__title");
+	
+	lists.setAttribute("data-svg", "build/images/logo-modificado.svg");
 
+	/**
+	 * @type { Array<Object<string, HTMLAnchorElement>> }
+	 */
 	const links = [];
 
 	/**
@@ -84,17 +103,32 @@ async function render(config) {
 	 * @param { Array<string|number> } data Lista de archivos
 	 */
 	const loadList = (data) => {
+		links.length = 0;
+
 		lists.textContent = "";
 		data.forEach((path, index) => {
+			/**
+			 * @type { string }
+			 */
+			let textTitle;
+
+			/**
+			 * @type { string }
+			 */
 			let __path = path.replace(/^(.\/)+/g, "");
 			__path = __path.replace(/(y2mate\.com)+/g, "");
 			__path = __path.replace(" - ", "");
 			__path = __path.replace(/([a-zá-ź_\-0-9]+\.mp4)/gi, "");
 			__path = __path.replace(/([a-zá-ź_\-0-9]+\.webm)/gi, "");
-			__path = __path.substring(0, 50) + "...";
+
+			textTitle = __path;
+
+			__path = `${__path.substring(0, 50)}...`;
 
 			const video = `multimedia/${path.replace(/^(\.\/)/, "")}`;
 			let imagen = "multimedia/jpeg" + path.replace(/(\.webm|\.mp4)/gi, ".jpg");
+			const search = path.replace(/(\.webm|\.mp4|^(\.\/))/gi, "");
+
 			imagen = imagen.replace(".", "");
 
 			const __list = list.cloneNode(false),
@@ -104,7 +138,6 @@ async function render(config) {
 				__title = title.cloneNode(false);
 
 			__title.textContent = __path;
-			// __title.textContent = path;
 
 			__img.setAttribute("src", imagen);
 			__graphic.appendChild(__img);
@@ -113,6 +146,8 @@ async function render(config) {
 			// Enlaces:
 			setAttributes(__list, {
 				"data-id": index,
+				"title": search,
+				"data-search": search,
 				href: video
 			});
 
@@ -122,30 +157,67 @@ async function render(config) {
 
 			links.push({ href: video, __list });
 		});
-
 	}
 
-
-	loadList(data);
-
-	const inputQuery = document.querySelector("#q");
 	if (inputQuery) {
 		inputQuery.oninput = function () {
-			console.clear();
 			const peliculas = searchData(this.value, data);
-
 			loadList(peliculas);
+		}
+
+		/**
+		 * 
+		 * @param {HTMLInputElement} element Input Element
+		 * @param { boolean } option Este parámetro es opcional. Su valor por
+		 * defecto «true»
+		 *  
+		 * @returns { void } 
+		 */
+		const focused = (element, option = true) => {
+			/**
+			 * @type { HTMLDivElement }
+			 */
+			const parentElement = element.parentNode.parentNode.parentNode;
+			if (!parentElement || !parentElement.classList.contains("search")) return;
+
+			option
+				? parentElement.classList.add("search--focused")
+				: parentElement.classList.remove("search--focused");
+		};
+
+		inputQuery.onfocus = function() {
+			focused(this);
+		}
+
+		inputQuery.onblur = function() {
+			focused(this, false);
 		}
 	}
 
+	/**
+	 * Mostrar la lista de reproducción al momento
+	 * de cargar si previamente se había introducido
+	 * un criterio de búsqueda.
+	 */
+	inputQuery.value.trim().length > 0
+		? loadList(searchData(inputQuery.value, data))
+		: loadList(filteredData);
+
 	lists.addEventListener("click", function (e) {
 		e.preventDefault();
+
+		/**
+		 * @type { HTMLAnchorElement }
+		 */
 		const anchor = e.target;
 
 		if (anchor.tagName !== "A") return;
 
 		video.setAttribute("data-id", anchor.dataset.id);
 		video.setAttribute("src", anchor.href);
+		history.pushState(data, "Done", `./?q=${anchor.dataset.search}`);
+
+		search(data);
 		location.href = "#multimedia";
 	});
 
@@ -167,6 +239,8 @@ async function render(config) {
 		if (repeat == "current") pos = Number(this.dataset.id);
 
 		const nextVideo = links[pos]?.href;
+
+		console.log({ nextVideo, links });
 
 		if (nextVideo) {
 			this.src = nextVideo;

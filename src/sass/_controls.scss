@@ -22,17 +22,40 @@
 
 .search {
     --height: 40px;
+    --min-width: 200px;
     --size-button: var(--height);
 
     --display: block;
+
+    transition: 300ms ease;
+
+    &__form {
+        flex-grow: 1;
+        padding: 0 10px;
+    }
+    &--focused {
+        @media screen and (max-width: 480px) {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+        }
+    }
 
     &__input {
         display: var(--display);
         position: relative;
         height: var(--height);
-        min-width: 200px;
+        min-width: var(--min-width);
         border-radius: calc(var(--size-button) / 2);
-        background-color: $color-base;
+
+        @media screen and (max-width: 480px) {
+            min-width: calc(var(--min-width) / 1.2);
+        }
     }
 
     [type="search"],
@@ -50,9 +73,7 @@
         bottom: 0;
 
         width: calc(100% - var(--size-button));
-        background-color: lighten(red, 40);
-        caret-color: red;
-        color: red;
+        caret-color: $color-base;
     }
 
     [type="search"] {
@@ -64,12 +85,10 @@
         padding-left: calc(var(--size-button) / 2);
         border-radius: calc(var(--size-button) / 2) 0 0
             calc(var(--size-button) / 2);
-        border-right: 1px solid rgba(red, 0.2);
 
         &:focus {
-            background-color: lighten(red, 50);
-            color: red;
             border-color: rgba(red, 0.3);
+            box-shadow: 4px 4px 0 0 rgba(white, 0.3);
         }
     }
 
