@@ -3,3 +3,5 @@ multimedia
 multimedia.
 .vscode
 mkv
+.env
+node_modules

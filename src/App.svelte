@@ -1,0 +1,1 @@
+<h2>Componente principal de svelte</h2>
